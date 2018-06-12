@@ -1,0 +1,3 @@
+at task number one
+
+System.IO.IOException: 'The process cannot access the file 'C:\Users\seraph\source\repos\Threading\Threading\bin\Debug\file.txt' because it is being used by another process.'

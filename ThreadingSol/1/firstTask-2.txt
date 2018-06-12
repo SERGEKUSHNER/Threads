@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.IO;
+
+namespace Threading
+{
+    class Program
+    {
+
+        static void writeInfile()
+        {
+
+          
+            using (StreamWriter sw = new StreamWriter(@"file.txt", true))
+            {
+                sw.Write(System.Threading.Thread.CurrentThread.ManagedThreadId+": ");
+
+               
+                sw.WriteLine(DateTime.Now.ToString("h:mm:ss tt"));
+               
+                sw.Flush();
+            }
+            
+        }
+
+
+        public static void Main(String[] args)
+        {
+            Console.WriteLine(Thread.CurrentThread.Name);
+
+            Thread[] threadsArray = new Thread[4];
+
+            for (int i = 0; i < 4; i++)
+            {
+             
+                
+                threadsArray[i] = new Thread(() => Program.writeInfile());
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                threadsArray[i].Start();
+
+                Thread.Sleep(1000);
+
+            }
+            for (int i = 0; i < 4; i++)
+            {
+                threadsArray[i].Join();
+            }
+
+           
+
+        }
+
+    }
+  }
+
+
